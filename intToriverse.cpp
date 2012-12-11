@@ -1,5 +1,4 @@
 
-
 #include "Toriverse.h"
 #include <iostream>
 
@@ -35,6 +34,8 @@ int main(){
   cout << "Position of wormhole b is: " <<testTori.getWHolePos(1,0,0) << ","<< testTori.getWHolePos(1,0,1) << "||" << testTori.getWHolePos(1,1,0) << ","<< testTori.getWHolePos(1,1,1) << endl;
   return 0;
 }
+  
+  
   
 
 
