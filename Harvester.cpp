@@ -1,4 +1,5 @@
 #include "Harvester.h"
+#include "Toriverse.h"
 #include <iostream>
 #include <cstdlib>
 #include <iomanip>
@@ -33,7 +34,7 @@ Harvester::Harvester(char* filename){
 
   while(!toriSpec.eof()){
     getline(toriSpec, line);
-    size_t foundEnergy = line.find('Harvester Energy: ');
+    size_t foundEnergy = line.find("Harvester Energy: ");
     size_t foundPos = line.find("Harvester Position: ");
     size_t foundLifeTime = line.find("Lifetime: ");
 
@@ -67,33 +68,306 @@ Harvester::Harvester(char* filename){
     Score += Energy;
 
   }
-
+  xMom = 0;
+  yMom = 0;
   HStatus = 1;
 
 }
 
 Harvester::~Harvester(){}
 
-Harvester::Command(Toriverse T, char cmd){
+void Harvester::HarvesterCMD(Toriverse& T, char cmd){
   if (HStatus && (Energy>0)){
 
-    if (cmd=='w') {xPos += xMom; yPos += yMom;};
-    else if (cmd=='X') {xMom++; xPos += xMom; yPos += yMom; Energy--;}
-    else if (cmd=='x') {xMom--; xPos += xMom; yPos += yMom; Energy--;}
-    else if (cmd=='Y') {yMom++; xPos += xMom; yPos += yMom; Energy--;}
-    else if (cmd=='y') {yMom--; xPos += xMom; yPos += yMom; Energy--;}
-    else if (cmd=='e') {
-      if ((xMom%T.getXDim())!=0 || (yMom%T.getYDim())!=0){
-	cout << "Error: Cannot end with momentum not 0!" << endl;
-      }
-      else {Score = Energy + T.getLifeTime();}
-    }
-    else {      cout << "Error: Invalid command!" << endl;}
+    if (cmd =='w' || cmd == 'X' || cmd == 'x' || cmd == 'Y' || cmd == 'y'){
 
+      if (cmd == 'w'){
+	if ((xPos + xMom) <= T.getXDim()-1 &&
+	    (xPos + xMom) >= 0){
+	  xPos += xMom;
+	  if ((yPos + yMom) <= T.getYDim()-1 &&
+	      (yPos + yMom) >= 0){
+	    yPos += yMom;
+	  }
+	  else if ((yPos + yMom) >= T.getYDim()){
+	    yPos = (yPos + yMom) % (T.getYDim());
+	  }
+	  else {
+	    yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
+	  }
+	}
+	else if ((xPos + xMom) >= T.getXDim() ||
+		 (xPos + xMom) < 0){
+	  if ((xPos + xMom) >= T.getXDim()){
+	    xPos = (xPos + xMom) % (T.getXDim());
+	    
+	    if ((yPos + yMom) <= T.getYDim()-1 &&
+		(yPos + yMom) >= 0){
+	      yPos += yMom;
+	    }
+	    else if ((yPos + yMom) >= T.getYDim()){
+	      yPos = (yPos + yMom) % (T.getYDim());
+	    }
+	    else {
+	      yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
+	    }
+	  }
+	  
+	  else {
+	    xPos = T.getXDim() + ((xPos + xMom) % (T.getXDim()));
+	    
+	    if ((yPos + yMom) <= T.getYDim()-1 &&
+		(yPos + yMom) >= 0){
+	      yPos += yMom;
+	    }
+	    else if ((yPos + yMom) >= T.getYDim()){
+	      yPos = (yPos + yMom) % (T.getYDim());
+	    }
+	    else {
+	      yPos = T.getXDim() + ((yPos + yMom) % (T.getYDim()));
+	    }
+	  }
+	}
+      }
+      
+      if (cmd=='X'){
+	xMom++;
+	Energy--;
+	
+	if ((xPos + xMom) <= T.getXDim()-1 &&
+	    (xPos + xMom) >= 0){
+	  xPos += xMom;
+	  if ((yPos + yMom) <= T.getYDim()-1 &&
+	      (yPos + yMom) >= 0){
+	    yPos += yMom;
+	  }
+	  else if ((yPos + yMom) >= T.getYDim()){
+	    yPos = (yPos + yMom) % (T.getYDim());
+	  }
+	  else {
+	    yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
+	  }
+	}
+	else if ((xPos + xMom) >= T.getXDim() ||
+		 (xPos + xMom) < 0){
+	  if ((xPos + xMom) >= T.getXDim()){
+	    xPos = (xPos + xMom) % (T.getXDim());
+	    
+	    if ((yPos + yMom) <= T.getYDim()-1 &&
+		(yPos + yMom) >= 0){
+	      yPos += yMom;
+	    }
+	    else if ((yPos + yMom) >= T.getYDim()){
+	      yPos = (yPos + yMom) % (T.getYDim());
+	    }
+	    else {
+	      yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
+	    }
+	  }
+	  
+	  else {
+	    xPos = T.getXDim() + ((xPos + xMom) % (T.getXDim()));
+	    
+	    if ((yPos + yMom) <= T.getYDim()-1 &&
+		(yPos + yMom) >= 0){
+	      yPos += yMom;
+	    }
+	    else if ((yPos + yMom) >= T.getYDim()){
+	      yPos = (yPos + yMom) % (T.getYDim());
+	    }
+	    else {
+	      yPos = T.getXDim() + ((yPos + yMom) % (T.getYDim()));
+	    }
+	  }
+	}
+      }
+      
+      else if (cmd=='x'){
+	xMom--;
+	Energy--;
+	
+	if ((xPos + xMom) <= T.getXDim()-1 &&
+	    (xPos + xMom) >= 0){
+	  xPos += xMom;
+	  if ((yPos + yMom) <= T.getYDim()-1 &&
+	      (yPos + yMom) >= 0){
+	    yPos += yMom;
+	  }
+	  else if ((yPos + yMom) >= T.getYDim()){
+	    yPos = (yPos + yMom) % (T.getYDim());
+	  }
+	  else {
+	    yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
+	  }
+	}
+	else if ((xPos + xMom) >= T.getXDim() ||
+		 (xPos + xMom) < 0){
+	  if ((xPos + xMom) >= T.getXDim()){
+	    xPos = (xPos + xMom) % (T.getXDim());
+	    
+	    if ((yPos + yMom) <= T.getYDim()-1 &&
+		(yPos + yMom) >= 0){
+	      yPos += yMom;
+	    }
+	    else if ((yPos + yMom) >= T.getYDim()){
+	      yPos = (yPos + yMom) % (T.getYDim());
+	    }
+	    else {
+	      yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
+	    }
+	  }
+	  
+	  else {
+	    xPos = T.getXDim() + ((xPos + xMom) % (T.getXDim()));
+	    
+	    if ((yPos + yMom) <= T.getYDim()-1 &&
+		(yPos + yMom) >= 0){
+	      yPos += yMom;
+	    }
+	    else if ((yPos + yMom) >= T.getYDim()){
+	      yPos = (yPos + yMom) % (T.getYDim());
+	    }
+	    else {
+	      yPos = T.getXDim() + ((yPos + yMom) % (T.getYDim()));
+	    }
+	  }
+	}
+      }
+      else if (cmd=='y'){
+	yMom--;
+	Energy--;
+	
+	if ((xPos + xMom) <= T.getXDim()-1 &&
+	    (xPos + xMom) >= 0){
+	  xPos += xMom;
+	  if ((yPos + yMom) <= T.getYDim()-1 &&
+	      (yPos + yMom) >= 0){
+	    yPos += yMom;
+	  }
+	  else if ((yPos + yMom) >= T.getYDim()){
+	    yPos = (yPos + yMom) % (T.getYDim());
+	  }
+	  else {
+	    yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
+	  }
+	}
+	else if ((xPos + xMom) >= T.getXDim() ||
+		 (xPos + xMom) < 0){
+	  if ((xPos + xMom) >= T.getXDim()){
+	    xPos = (xPos + xMom) % (T.getXDim());
+	    
+	    if ((yPos + yMom) <= T.getYDim()-1 &&
+		(yPos + yMom) >= 0){
+	      yPos += yMom;
+	    }
+	    else if ((yPos + yMom) >= T.getYDim()){
+	      yPos = (yPos + yMom) % (T.getYDim());
+	    }
+	    else {
+	      yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
+	    }
+	  }
+	  
+	  else {
+	    xPos = T.getXDim() + ((xPos + xMom) % (T.getXDim()));
+	    
+	    if ((yPos + yMom) <= T.getYDim()-1 &&
+		(yPos + yMom) >= 0){
+	      yPos += yMom;
+	    }
+	    else if ((yPos + yMom) >= T.getYDim()){
+	      yPos = (yPos + yMom) % (T.getYDim());
+	    }
+	    else {
+	      yPos = T.getXDim() + ((yPos + yMom) % (T.getYDim()));
+	    }
+	  }
+	}
+      }
+      else if (cmd == 'Y'){
+	yMom++;
+	Energy--;
+	
+	if ((xPos + xMom) <= T.getXDim()-1 &&
+	    (xPos + xMom) >= 0){
+	  xPos += xMom;
+	  if ((yPos + yMom) <= T.getYDim()-1 &&
+	      (yPos + yMom) >= 0){
+	    yPos += yMom;
+	  }
+	  else if ((yPos + yMom) >= T.getYDim()){
+	    yPos = (yPos + yMom) % (T.getYDim());
+	  }
+	  else {
+	    yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
+	  }
+	}
+	else if ((xPos + xMom) >= T.getXDim() ||
+		 (xPos + xMom) < 0){
+	  if ((xPos + xMom) >= T.getXDim()){
+	    xPos = (xPos + xMom) % (T.getXDim());
+	    
+	    if ((yPos + yMom) <= T.getYDim()-1 &&
+		(yPos + yMom) >= 0){
+	      yPos += yMom;
+	    }
+	    else if ((yPos + yMom) >= T.getYDim()){
+	      yPos = (yPos + yMom) % (T.getYDim());
+	    }
+	    else {
+	      yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
+	    }
+	  }
+	  
+	  else {
+	    xPos = T.getXDim() + ((xPos + xMom) % (T.getXDim()));
+	    
+	    if ((yPos + yMom) <= T.getYDim()-1 &&
+		(yPos + yMom) >= 0){
+	      yPos += yMom;
+	    }
+	    else if ((yPos + yMom) >= T.getYDim()){
+	      yPos = (yPos + yMom) % (T.getYDim());
+	    }
+	    else {
+	      yPos = T.getXDim() + ((yPos + yMom) % (T.getYDim()));
+	    }
+	  }
+	}
+      }
+    }
+      
+    else if (cmd == 'e') {
+      if ((xMom % T.getXDim())!=0 || (yMom % T.getYDim())!=0){
+	setFate("Error: Cannot end with momentum not 0!");
+	setStatus(0);
+	setScore(0);
+      }
+      else if (T.getNSLocks() != 0){
+	setFate("Error: Space locks remain!");
+	setStatus(0);
+	setScore(0);
+      }
+      else {
+	Score = Energy + T.getLifeTime();
+	setStatus(0);
+	setFate("Harvester exited safely");
+      }
+    }
+    else {
+      cout << "Error: Invalid command!" << endl;
+    }
+    
   }
+      
 
   else {
-    if (!HStatus) cout << "Error: Destroyed by black hole";
-    if (Energy<0) cout << "Error: negative energy";
+    if (!HStatus) {
+      setFate("Error: Destroyed by Black Hole!");
+	}
+    if (Energy<0) {
+      cout << "Error: negative energy";
+      setStatus(0);
+    }
   }
 }
