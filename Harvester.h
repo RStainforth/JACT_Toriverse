@@ -38,6 +38,10 @@ public:
   bool getStatus() {return HStatus;}
 
   // Command function
+
+  int modH(int x, int m){
+    return (x%m + m)%m;
+  }
   void HarvesterCMD(Toriverse& T, char cmd);
   int xPos;
   int yPos;
