@@ -82,258 +82,42 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
     if (cmd =='w' || cmd == 'X' || cmd == 'x' || cmd == 'Y' || cmd == 'y'){
 
       if (cmd == 'w'){
-	if ((xPos + xMom) <= T.getXDim()-1 &&
-	    (xPos + xMom) >= 0){
-	  xPos += xMom;
-	  if ((yPos + yMom) <= T.getYDim()-1 &&
-	      (yPos + yMom) >= 0){
-	    yPos += yMom;
-	  }
-	  else if ((yPos + yMom) >= T.getYDim()){
-	    yPos = (yPos + yMom) % (T.getYDim());
-	  }
-	  else {
-	    yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
-	  }
-	}
-	else if ((xPos + xMom) >= T.getXDim() ||
-		 (xPos + xMom) < 0){
-	  if ((xPos + xMom) >= T.getXDim()){
-	    xPos = (xPos + xMom) % (T.getXDim());
-	    
-	    if ((yPos + yMom) <= T.getYDim()-1 &&
-		(yPos + yMom) >= 0){
-	      yPos += yMom;
-	    }
-	    else if ((yPos + yMom) >= T.getYDim()){
-	      yPos = (yPos + yMom) % (T.getYDim());
-	    }
-	    else {
-	      yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
-	    }
-	  }
-	  
-	  else {
-	    xPos = T.getXDim() + ((xPos + xMom) % (T.getXDim()));
-	    
-	    if ((yPos + yMom) <= T.getYDim()-1 &&
-		(yPos + yMom) >= 0){
-	      yPos += yMom;
-	    }
-	    else if ((yPos + yMom) >= T.getYDim()){
-	      yPos = (yPos + yMom) % (T.getYDim());
-	    }
-	    else {
-	      yPos = T.getXDim() + ((yPos + yMom) % (T.getYDim()));
-	    }
-	  }
-	}
+	xPos = modH(xPos + xMom, T.getXDim());
+	yPos = modH(yPos + yMom, T.getYDim());
       }
       
       if (cmd=='X'){
-	xMom++;
 	Energy--;
-	
-	if ((xPos + xMom) <= T.getXDim()-1 &&
-	    (xPos + xMom) >= 0){
-	  xPos += xMom;
-	  if ((yPos + yMom) <= T.getYDim()-1 &&
-	      (yPos + yMom) >= 0){
-	    yPos += yMom;
-	  }
-	  else if ((yPos + yMom) >= T.getYDim()){
-	    yPos = (yPos + yMom) % (T.getYDim());
-	  }
-	  else {
-	    yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
-	  }
-	}
-	else if ((xPos + xMom) >= T.getXDim() ||
-		 (xPos + xMom) < 0){
-	  if ((xPos + xMom) >= T.getXDim()){
-	    xPos = (xPos + xMom) % (T.getXDim());
-	    
-	    if ((yPos + yMom) <= T.getYDim()-1 &&
-		(yPos + yMom) >= 0){
-	      yPos += yMom;
-	    }
-	    else if ((yPos + yMom) >= T.getYDim()){
-	      yPos = (yPos + yMom) % (T.getYDim());
-	    }
-	    else {
-	      yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
-	    }
-	  }
-	  
-	  else {
-	    xPos = T.getXDim() + ((xPos + xMom) % (T.getXDim()));
-	    
-	    if ((yPos + yMom) <= T.getYDim()-1 &&
-		(yPos + yMom) >= 0){
-	      yPos += yMom;
-	    }
-	    else if ((yPos + yMom) >= T.getYDim()){
-	      yPos = (yPos + yMom) % (T.getYDim());
-	    }
-	    else {
-	      yPos = T.getXDim() + ((yPos + yMom) % (T.getYDim()));
-	    }
-	  }
-	}
+	xMom++;
+	xMom = modH(xMom, T.getXDim());
+	xPos = modH(xPos + xMom, T.getXDim());
+	yPos = modH(yPos + yMom, T.getYDim());
+
       }
       
       else if (cmd=='x'){
-	xMom--;
+
 	Energy--;
-	
-	if ((xPos + xMom) <= T.getXDim()-1 &&
-	    (xPos + xMom) >= 0){
-	  xPos += xMom;
-	  if ((yPos + yMom) <= T.getYDim()-1 &&
-	      (yPos + yMom) >= 0){
-	    yPos += yMom;
-	  }
-	  else if ((yPos + yMom) >= T.getYDim()){
-	    yPos = (yPos + yMom) % (T.getYDim());
-	  }
-	  else {
-	    yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
-	  }
-	}
-	else if ((xPos + xMom) >= T.getXDim() ||
-		 (xPos + xMom) < 0){
-	  if ((xPos + xMom) >= T.getXDim()){
-	    xPos = (xPos + xMom) % (T.getXDim());
-	    
-	    if ((yPos + yMom) <= T.getYDim()-1 &&
-		(yPos + yMom) >= 0){
-	      yPos += yMom;
-	    }
-	    else if ((yPos + yMom) >= T.getYDim()){
-	      yPos = (yPos + yMom) % (T.getYDim());
-	    }
-	    else {
-	      yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
-	    }
-	  }
-	  
-	  else {
-	    xPos = T.getXDim() + ((xPos + xMom) % (T.getXDim()));
-	    
-	    if ((yPos + yMom) <= T.getYDim()-1 &&
-		(yPos + yMom) >= 0){
-	      yPos += yMom;
-	    }
-	    else if ((yPos + yMom) >= T.getYDim()){
-	      yPos = (yPos + yMom) % (T.getYDim());
-	    }
-	    else {
-	      yPos = T.getXDim() + ((yPos + yMom) % (T.getYDim()));
-	    }
-	  }
-	}
+	xMom--;
+	xMom = modH(xMom, T.getXDim());
+	xPos = modH(xPos + xMom, T.getXDim());
+	yPos = modH(yPos + yMom, T.getYDim());
       }
       else if (cmd=='y'){
 	yMom--;
 	Energy--;
-	
-	if ((xPos + xMom) <= T.getXDim()-1 &&
-	    (xPos + xMom) >= 0){
-	  xPos += xMom;
-	  if ((yPos + yMom) <= T.getYDim()-1 &&
-	      (yPos + yMom) >= 0){
-	    yPos += yMom;
-	  }
-	  else if ((yPos + yMom) >= T.getYDim()){
-	    yPos = (yPos + yMom) % (T.getYDim());
-	  }
-	  else {
-	    yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
-	  }
-	}
-	else if ((xPos + xMom) >= T.getXDim() ||
-		 (xPos + xMom) < 0){
-	  if ((xPos + xMom) >= T.getXDim()){
-	    xPos = (xPos + xMom) % (T.getXDim());
-	    
-	    if ((yPos + yMom) <= T.getYDim()-1 &&
-		(yPos + yMom) >= 0){
-	      yPos += yMom;
-	    }
-	    else if ((yPos + yMom) >= T.getYDim()){
-	      yPos = (yPos + yMom) % (T.getYDim());
-	    }
-	    else {
-	      yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
-	    }
-	  }
-	  
-	  else {
-	    xPos = T.getXDim() + ((xPos + xMom) % (T.getXDim()));
-	    
-	    if ((yPos + yMom) <= T.getYDim()-1 &&
-		(yPos + yMom) >= 0){
-	      yPos += yMom;
-	    }
-	    else if ((yPos + yMom) >= T.getYDim()){
-	      yPos = (yPos + yMom) % (T.getYDim());
-	    }
-	    else {
-	      yPos = T.getXDim() + ((yPos + yMom) % (T.getYDim()));
-	    }
-	  }
-	}
+	yMom = modH(yMom, T.getYDim());
+	xPos = modH(xPos + xMom, T.getXDim());
+	yPos = modH(yPos + yMom, T.getYDim());
+
       }
       else if (cmd == 'Y'){
-	yMom++;
 	Energy--;
-	
-	if ((xPos + xMom) <= T.getXDim()-1 &&
-	    (xPos + xMom) >= 0){
-	  xPos += xMom;
-	  if ((yPos + yMom) <= T.getYDim()-1 &&
-	      (yPos + yMom) >= 0){
-	    yPos += yMom;
-	  }
-	  else if ((yPos + yMom) >= T.getYDim()){
-	    yPos = (yPos + yMom) % (T.getYDim());
-	  }
-	  else {
-	    yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
-	  }
-	}
-	else if ((xPos + xMom) >= T.getXDim() ||
-		 (xPos + xMom) < 0){
-	  if ((xPos + xMom) >= T.getXDim()){
-	    xPos = (xPos + xMom) % (T.getXDim());
-	    
-	    if ((yPos + yMom) <= T.getYDim()-1 &&
-		(yPos + yMom) >= 0){
-	      yPos += yMom;
-	    }
-	    else if ((yPos + yMom) >= T.getYDim()){
-	      yPos = (yPos + yMom) % (T.getYDim());
-	    }
-	    else {
-	      yPos = T.getYDim() + ((yPos + yMom) % (T.getYDim()));
-	    }
-	  }
-	  
-	  else {
-	    xPos = T.getXDim() + ((xPos + xMom) % (T.getXDim()));
-	    
-	    if ((yPos + yMom) <= T.getYDim()-1 &&
-		(yPos + yMom) >= 0){
-	      yPos += yMom;
-	    }
-	    else if ((yPos + yMom) >= T.getYDim()){
-	      yPos = (yPos + yMom) % (T.getYDim());
-	    }
-	    else {
-	      yPos = T.getXDim() + ((yPos + yMom) % (T.getYDim()));
-	    }
-	  }
-	}
+	yMom++;
+	yMom = modH(yMom, T.getYDim());
+	xPos = modH(xPos + xMom, T.getXDim());
+	yPos = modH(yPos + yMom, T.getYDim());
+
       }
     }
       
