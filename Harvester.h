@@ -1,4 +1,4 @@
-// Prevents the toriverse header file being included more than once
+// Prevents the harvester header file being included more than once
 #ifndef HARVESTER_h
 #define HARVESTER_h
 
@@ -59,4 +59,3 @@ protected:
 };
 
 #endif
-
