@@ -2,10 +2,13 @@
 #ifndef TORIVERSE_h
 #define TORIVERSE_h
 
+#include "Harvester.h"
 #include <string>
 #include <vector>
 
 using namespace std;
+
+class Harvester;
 
 class Toriverse {
 
@@ -16,13 +19,11 @@ public:
   Toriverse(char* filename);
   ~Toriverse();
 
-  //void objectInteract(char* object);
-  //void harvester
+  void Interaction(Harvester& Harvey);
   
   // Setters...
   void setObject(string Obj, int xPos, int yPos){Map[xPos][yPos] = Obj;}
-  //void timeStep(char cmd);
-  //void destroyToriverse();
+  void timeStep(){lifeTime--;};
 
   //  Getters ...
 
@@ -39,7 +40,7 @@ public:
     
   
   
-  std::string getObject(int xPos, int yPos) {
+  string getObject(int xPos, int yPos) {
   return Map[xPos][yPos];
   }
 
