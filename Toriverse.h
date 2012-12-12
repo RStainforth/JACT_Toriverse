@@ -1,4 +1,4 @@
-// Prevents the toriverse header file being included more than once
+// Prevents the Toriverse header file being included more than once
 #ifndef TORIVERSE_h
 #define TORIVERSE_h
 
