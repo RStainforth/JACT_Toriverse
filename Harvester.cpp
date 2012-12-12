@@ -81,42 +81,62 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
     if ((cmd =='w') || (cmd == 'X') || (cmd == 'x') || (cmd == 'Y') || (cmd == 'y')){
 
       if (cmd == 'w'){
-	cout << "WAIT!" << endl;
 	xPos = modH(xPos + xMom, T.getXDim());
 	yPos = modH(yPos + yMom, T.getYDim());
       }
       
       if (cmd=='X'){
-	Energy--;
-	xMom++;
-	xMom = modH(xMom, T.getXDim());
-	xPos = modH(xPos + xMom, T.getXDim());
-	yPos = modH(yPos + yMom, T.getYDim());
-
+	if (Energy == 0){
+	  setStatus(0);
+	  setFate("You ran out of Energy!");
+	}
+	else {
+	  Energy--;
+	  xMom++;
+	  xMom = modH(xMom, T.getXDim());
+	  xPos = modH(xPos + xMom, T.getXDim());
+	  yPos = modH(yPos + yMom, T.getYDim());
+	}
       }
       
       else if (cmd=='x'){
-	Energy--;
-	xMom--;
-	xMom = modH(xMom, T.getXDim());
-	xPos = modH(xPos + xMom, T.getXDim());
-	yPos = modH(yPos + yMom, T.getYDim());
+	if (Energy == 0){
+	  setStatus(0);
+	  setFate("You ran out of Energy!");
+	}
+	else{
+	  Energy--;
+	  xMom--;
+	  xMom = modH(xMom, T.getXDim());
+	  xPos = modH(xPos + xMom, T.getXDim());
+	  yPos = modH(yPos + yMom, T.getYDim());
+	}
       }
       else if (cmd=='y'){
-	yMom--;
-	Energy--;
-	yMom = modH(yMom, T.getYDim());
-	xPos = modH(xPos + xMom, T.getXDim());
-	yPos = modH(yPos + yMom, T.getYDim());
-
+	if (Energy == 0){
+	  setStatus(0);
+	  setFate("You ran out of Energy!");	  
+	}
+	else{
+	  Energy--;
+	  yMom--;
+	  yMom = modH(yMom, T.getYDim());
+	  xPos = modH(xPos + xMom, T.getXDim());
+	  yPos = modH(yPos + yMom, T.getYDim());
+	}
       }
       else if (cmd == 'Y'){
-	Energy--;
-	yMom++;
-	yMom = modH(yMom, T.getYDim());
-	xPos = modH(xPos + xMom, T.getXDim());
-	yPos = modH(yPos + yMom, T.getYDim());
-
+	if (Energy == 0){
+	  setStatus(0);
+	  setFate("You ran out of Energy!");
+	}
+	else{
+	  Energy--;
+	  yMom++;
+	  yMom = modH(yMom, T.getYDim());
+	  xPos = modH(xPos + xMom, T.getXDim());
+	  yPos = modH(yPos + yMom, T.getYDim());
+	}
       }
     }
       
