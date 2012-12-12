@@ -1,17 +1,15 @@
-
 #include "Toriverse.h"
 #include "Harvester.h"
 #include <iostream>
 
 using namespace std;
 
-int main(){
+int main( int argc, char** argv ){
+  //start with ./'name' 'mapname'
   cout << "Welcome Player...to the Toriverse!" << endl;
-  Toriverse testTori("2dmap.map");
-  Harvester testHarvey("2dmap.map");
-
-  cout << testHarvey.modH(-2,5) << endl;
-  cout << testHarvey.modH(2,5) << endl;
+  
+  Toriverse testTori(argv[1]);
+  Harvester testHarvey(argv[1]);int main( int argc, char** argv ){
 
   while(testHarvey.getStatus()){
     char cmd;
