@@ -1,4 +1,5 @@
 #include "Toriverse.h"
+#include "Harvester.h"
 #include <iostream>
 #include <cstdlib>
 #include <iomanip>
@@ -93,7 +94,49 @@ Toriverse::Toriverse(char* filename){
 
 Toriverse::~Toriverse(){}
 
+void Toriverse::Interaction(Harvester& Harvey){
+  int tmpVecPosX = Harvey.getXPos();
+  int tmpVecPosY = Harvey.getYPos();
 
+  if (getObject(tmpVecPosX,tmpVecPosY)=="."){
+    timeStep();
+  }
+
+  else if (getObject(tmpVecPosX,tmpVecPosY)=="*"){
+    setObject(".",tmpVecPosX,tmpVecPosY);
+    Harvey.setEnergy(energyDensity);
+    timeStep();
+  }
+
+  else if (getObject(tmpVecPosX,tmpVecPosY)=="@"){
+    Harvey.setScore(0);
+    Harvey.setStatus(0);
+    timeStep();
+  }
+
+  else if (getObject(tmpVecPosX,tmpVecPosY)=="//"){
+    setObject(".",tmpVecPosX,tmpVecPosY);
+    nSLocks--;
+    timeStep();
+  }
+
+  else if (96 < atoi((getObject(tmpVecPosX,tmpVecPosY)).c_str()) &&
+	   atoi((getObject(tmpVecPosX,tmpVecPosY)).c_str()) < 123){
+    int lTmp = atoi((getObject(tmpVecPosX,tmpVecPosY)).c_str()) - 97;
+    if (tmpVecPosX == getWHolePos(lTmp,0,0) &&
+	tmpVecPosY == getWHolePos(lTmp,0,1)){
+      Harvey.setXPos(getWHolePos(lTmp,1,0));
+      Harvey.setYPos(getWHolePos(lTmp,1,1));
+    }
+    else if (tmpVecPosX == getWHolePos(lTmp,1,0) &&
+	     tmpVecPosY == getWHolePos(lTmp,1,1)){
+      Harvey.setXPos(getWHolePos(lTmp,0,0));
+      Harvey.setYPos(getWHolePos(lTmp,0,1));    
+    }
+  }
+  timeStep();
+}
+		     
 
 
 
