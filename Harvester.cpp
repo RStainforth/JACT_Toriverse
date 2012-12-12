@@ -151,10 +151,12 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
   else {
     if (!HStatus) {
       setFate("Error: Destroyed by Black Hole!");
-	}
+      setScore(0);
+    }
     if (Energy<0) {
       cout << "Error: negative energy";
       setStatus(0);
+      setScore(0);
     }
   }
 }
