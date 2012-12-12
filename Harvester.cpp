@@ -63,21 +63,20 @@ Harvester::Harvester(char* filename){
       while(getline(lineStr, val, ' ')){
 	valsLife.push_back(atoi(val.c_str()));
       }
-      Score = valsLife[1];
     }
-    Score += Energy;
 
   }
   xMom = 0;
   yMom = 0;
   HStatus = 1;
+  Score = 0;
 
 }
 
 Harvester::~Harvester(){}
 
 void Harvester::HarvesterCMD(Toriverse& T, char cmd){
-  if (HStatus && (Energy>=0)){
+  if (HStatus && (Energy>=0) && T.getLifeTime() > 0){
 
     if ((cmd =='w') || (cmd == 'X') || (cmd == 'x') || (cmd == 'Y') || (cmd == 'y')){
 
@@ -128,7 +127,7 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
 	setScore(0);
       }
       else if (T.getNSLocks() != 0){
-	setFate("Error: Space locks remain!");
+	setFate("Error: Space locks remain! Harvester DESTROYED!");
 	setStatus(0);
 	setScore(0);
       }
@@ -151,10 +150,18 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
   else {
     if (!HStatus) {
       setFate("Error: Destroyed by Black Hole!");
+      setScore(0);
 	}
     if (Energy<0) {
-      cout << "Error: negative energy";
+      setFate("Error: negative energy");
       setStatus(0);
+      setScore(0);
+      
+    }
+    if (T.getLifeTime() < 0){
+      setStatus(0);
+      setFate("Ran out of time!");
+      setScore(0);
     }
   }
 }
