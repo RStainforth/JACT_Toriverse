@@ -42,7 +42,7 @@ Harvester::Harvester(char* filename){
       istringstream lineStr(line);
       vector<int> valsEnergy;
       while(getline(lineStr, val, ' ')){
-  valsEnergy.push_back(atoi(val.c_str()));
+	valsEnergy.push_back(atoi(val.c_str()));
       }
       Energy = valsEnergy[2];
     }
@@ -77,11 +77,12 @@ Harvester::Harvester(char* filename){
 Harvester::~Harvester(){}
 
 void Harvester::HarvesterCMD(Toriverse& T, char cmd){
-  if (HStatus && (Energy>0)){
+  if (HStatus && (Energy>=0)){
 
-    if (cmd =='w' || cmd == 'X' || cmd == 'x' || cmd == 'Y' || cmd == 'y'){
+    if ((cmd =='w') || (cmd == 'X') || (cmd == 'x') || (cmd == 'Y') || (cmd == 'y')){
 
       if (cmd == 'w'){
+	cout << "WAIT!" << endl;
 	xPos = modH(xPos + xMom, T.getXDim());
 	yPos = modH(yPos + yMom, T.getYDim());
       }
@@ -96,7 +97,6 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
       }
       
       else if (cmd=='x'){
-
 	Energy--;
 	xMom--;
 	xMom = modH(xMom, T.getXDim());
@@ -122,7 +122,7 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
     }
       
     else if (cmd == 'e') {
-      if ((xMom % T.getXDim())!=0 || (yMom % T.getYDim())!=0){
+      if ((xMom!=0) || (yMom!=0)){
 	setFate("Error: Cannot end with momentum not 0!");
 	setStatus(0);
 	setScore(0);
@@ -140,6 +140,9 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
     }
     else {
       cout << "Error: Invalid command!" << endl;
+      setStatus(0);
+      setScore(0);
+      setFate("Harvester destroyed by false command");
     }
     
   }
