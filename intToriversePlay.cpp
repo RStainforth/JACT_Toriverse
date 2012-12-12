@@ -29,7 +29,7 @@ int main( int argc, char** argv ){
   cout << endl;
 
   for (int i = testTori.getYDim()-1; i >= 0; i--){
-    for (int j = 0; j < testTori.getXDim()-1; j++){
+    for (int j = 0; j < testTori.getXDim(); j++){
       if (i == testHarvey.getYPos() && j == testHarvey.getXPos()){
 	cout << "X";
       }
@@ -53,7 +53,7 @@ int main( int argc, char** argv ){
       cmdVec.push_back(cmd);
       
       for (int i = testTori.getYDim()-1; i >= 0; i--){
-	for (int j = 0; j < testTori.getXDim()-1; j++){
+	for (int j = 0; j < testTori.getXDim(); j++){
 	  if (i == testHarvey.getYPos() && j == testHarvey.getXPos()){
 	    cout << "X";
 	  }
