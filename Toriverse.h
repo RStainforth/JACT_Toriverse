@@ -4,6 +4,7 @@
 
 #include "Harvester.h"
 #include <string>
+#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -23,7 +24,10 @@ public:
   
   // Setters...
   void setObject(string Obj, int xPos, int yPos){Map[xPos][yPos] = Obj;}
-  void timeStep(){lifeTime--;};
+  void timeStep(){
+    lifeTime--;
+    cout << "Lifetime is: " << lifeTime << endl;
+  }
 
   //  Getters ...
 
