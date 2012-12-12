@@ -26,7 +26,7 @@ public:
   void setObject(string Obj, int xPos, int yPos){Map[xPos][yPos] = Obj;}
   void timeStep(){
     lifeTime--;
-    cout << "Lifetime is: " << lifeTime << endl;
+    //cout << "Lifetime is: " << lifeTime << endl;
   }
 
   //  Getters ...
