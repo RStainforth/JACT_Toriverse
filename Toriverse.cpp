@@ -62,6 +62,12 @@ Toriverse::Toriverse(char* filename){
 	tmpVec.push_back(yDim-i-1);
 	WHoles[int(line[j])-97].push_back(tmpVec);
       }
+      else if (64 < (int(line[j])) && (int(line[j])) < 91){
+	vector<int> tmpVec(0);
+	tmpVec.push_back(j);
+	tmpVec.push_back(yDim-i-1);
+	WHoles[int(line[j])-65].push_back(tmpVec);
+      }
     }
   }
 
@@ -110,6 +116,7 @@ void Toriverse::Interaction(Harvester& Harvey){
   else if (getObject(tmpVecPosX,tmpVecPosY)=="@"){
     Harvey.setScore(0);
     Harvey.setStatus(0);
+    Harvey.setFate("DESTOYED BY BLACK HOLE!");
 
   }
 
@@ -119,25 +126,37 @@ void Toriverse::Interaction(Harvester& Harvey){
     cout << "SSLock Removed!" << endl;
   }
 
-  else if (96 < int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) &&
-	   int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) < 123){
-    int lTmp = int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) - 97;
-    if (tmpVecPosX == getWHolePos(lTmp,0,0) &&
-	tmpVecPosY == getWHolePos(lTmp,0,1)){
-      Harvey.setXPos(getWHolePos(lTmp,1,0));
-      Harvey.setYPos(getWHolePos(lTmp,1,1));
+  else if ((96 < int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) &&
+	    int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) < 123))
+    {
+      int lTmp = int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) - 97;
+      if (tmpVecPosX == getWHolePos(lTmp,0,0) &&
+	  tmpVecPosY == getWHolePos(lTmp,0,1)){
+	Harvey.setXPos(getWHolePos(lTmp,1,0));
+	Harvey.setYPos(getWHolePos(lTmp,1,1));
+      }
+      else if (tmpVecPosX == getWHolePos(lTmp,1,0) &&
+	       tmpVecPosY == getWHolePos(lTmp,1,1)){
+	Harvey.setXPos(getWHolePos(lTmp,0,0));
+	Harvey.setYPos(getWHolePos(lTmp,0,1));    
+      } 
     }
-    else if (tmpVecPosX == getWHolePos(lTmp,1,0) &&
-	     tmpVecPosY == getWHolePos(lTmp,1,1)){
-      Harvey.setXPos(getWHolePos(lTmp,0,0));
-      Harvey.setYPos(getWHolePos(lTmp,0,1));    
-    } 
-  }
+
+  else if ((64 < int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) &&
+	    int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) < 91))
+    {
+      int lTmp = int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) - 65;
+      if (tmpVecPosX == getWHolePos(lTmp,0,0) &&
+	  tmpVecPosY == getWHolePos(lTmp,0,1)){
+	Harvey.setXPos(getWHolePos(lTmp,1,0));
+	Harvey.setYPos(getWHolePos(lTmp,1,1));
+      }
+      else if (tmpVecPosX == getWHolePos(lTmp,1,0) &&
+	       tmpVecPosY == getWHolePos(lTmp,1,1)){
+	Harvey.setXPos(getWHolePos(lTmp,0,0));
+	Harvey.setYPos(getWHolePos(lTmp,0,1));    
+      } 
+    }
+  
   timeStep();
 }
-		     
-
-
-
-
-
