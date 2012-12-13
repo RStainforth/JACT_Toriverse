@@ -1,4 +1,4 @@
-// Prevents the Toriverse header file being included more than once
+// Prevents the toriverse header file being included more than once
 #ifndef TORIVERSE_h
 #define TORIVERSE_h
 
@@ -56,8 +56,10 @@ protected:
   int energyDensity;
   int status;
   int nSLocks;
+  int lastMLock;
   std::vector<std::vector<std::string> >  Map;
   std::vector<std::vector<std::vector<int> > > WHoles;
+  std::vector<std::vector<int> > MLockStore;
 
 
 };
