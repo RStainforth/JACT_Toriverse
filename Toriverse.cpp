@@ -54,7 +54,7 @@ Toriverse::Toriverse(char* filename){
     for (int j = 0; j < line.length(); j++){
       Map[j][yDim-i-1] = line[j];
       if (line[j] == '\\'){
-  nSLocks++;
+  	nSLocks++;
       }
       if (96 < (int(line[j])) && (int(line[j])) < 123){
 	vector<int> tmpVec(0);
@@ -63,10 +63,7 @@ Toriverse::Toriverse(char* filename){
 	WHoles[int(line[j])-97].push_back(tmpVec);
       }
       else if (64 < (int(line[j])) && (int(line[j])) < 91){
-	vector<int> tmpVec(0);
-	tmpVec.push_back(j);
-	tmpVec.push_back(yDim-i-1);
-	WHoles[int(line[j])-65].push_back(tmpVec);
+	nSLocks++;
       }
     }
   }
