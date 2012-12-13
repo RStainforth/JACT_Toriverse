@@ -152,16 +152,20 @@ void Toriverse::Interaction(Harvester& Harvey){
 	lastMLock = lTmp;
       }
       else if (!MLockStore.empty() && lastMLock == lTmp){
-	vector<int> tmpVecML;
-	tmpVecML.push_back(tmpVecPosX);
-	tmpVecML.push_back(tmpVecPosY);
-	MLockStore.push_back(tmpVecML);
-	setObject(".",MLockStore[0][0],MLockStore[0][1]);
-	setObject(".",MLockStore[1][0],MLockStore[1][1]);
-	nSLocks--;
-    	cout << "MSLock Removed!" << endl;
-	while(!MLockStore.empty()){
-	  MLockStore.pop_back();
+	if (MLockStore[0][0] != tmpVecPosX &&
+	    MLockStore[0][1] != tmpVecPosY){
+	  vector<int> tmpVecML;
+	  tmpVecML.push_back(tmpVecPosX);
+	  tmpVecML.push_back(tmpVecPosY);
+	  MLockStore.push_back(tmpVecML);
+	  setObject(".",MLockStore[0][0],MLockStore[0][1]);
+	  setObject(".",MLockStore[1][0],MLockStore[1][1]);
+	  nSLocks--;
+	  nSLocks--;
+	  cout << "MSLock Removed!" << endl;
+	  while(!MLockStore.empty()){
+	    MLockStore.pop_back();
+	  }
 	}
       }
       else if (!MLockStore.empty() && lastMLock != lTmp){
