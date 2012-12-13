@@ -38,11 +38,19 @@ public:
   int getEnergyDensity() {return energyDensity;}
   int getStatus() {return status;}
   int getNSLocks() {return nSLocks;}
+
   int getWHolePos(int letter, int a, int b){
     return WHoles[letter][a][b];
   }
+
     
-  
+  void printMap();
+  int getLastMLock() {return lastMLock;}
+  int getMLockStorePos(int i) {return MLockStore[0][i];}
+  int getMLockStoreCont() {
+    if(!MLockStore.empty()) {return 1;}
+    else {return 0;}
+}
   
   string getObject(int xPos, int yPos) {
   return Map[xPos][yPos];
