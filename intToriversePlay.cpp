@@ -83,11 +83,20 @@ int main( int argc, char** argv ){
   cout << endl;
   cout << "Path written to: ";
   puts (str1);
-  ofstream outfile (str1);
-  for (int k =0; k < cmdVec.size(); k++){
-    outfile << cmdVec[k];
+  if (testHarvey.getScore() != 0){
+  	cmdVec.push_back('e');
+  	char str1[80];
+  	strcpy(str1,argv[1]);
+  	strcat(str1,".hpg");
+  	cout << endl;
+  	cout << "Successful path written to: ";
+  	puts (str1);
+  	ofstream outfile (str1);
+  	for (int k =0; k < cmdVec.size(); k++){
+    		outfile << cmdVec[k];
+  	}
+  	outfile.close();
   }
-  outfile.close();
   cout << endl;
   cout << "Thank you for playing!" << endl;
   cout << endl;
