@@ -152,7 +152,7 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
 	setScore(0);
       }
       else {
-	Score = Energy + T.getLifeTime();
+	Score = Energy + T.getLifeTime() -1;
 	setStatus(0);
 	setFate("Harvester exited safely");
       }
@@ -163,7 +163,7 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
       setScore(0);
       setFate("Harvester destroyed by false command");
     }
-    
+    T.timeStep();
   }
       
 
@@ -178,10 +178,42 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
       setScore(0);
       
     }
-    if (T.getLifeTime() < 0){
+    if (T.getLifeTime() <= 0){
       setStatus(0);
       setFate("Ran out of time!");
       setScore(0);
     }
   }
+
+}
+
+
+void Harvester::positionInMap(Toriverse& T){
+  cout << "You Harvester position is marked with an '+'" << endl;
+  cout << "There is an '"<<T.getObject(getXPos(),getYPos())<<"' at this position"<<endl;
+  cout << endl;
+  
+  for (int i = T.getYDim()-1; i >= 0; i--){
+    for (int j = 0; j < T.getXDim(); j++){
+      if (i == getYPos() && j == getXPos()){
+	cout << "+";
+      }
+      else{
+	cout << T.getObject(j,i);
+      }
+    }
+    cout << endl;
+  }
+  
+}
+
+
+void Harvester::getCharacterH(Toriverse& T){
+  cout <<"XPos is: " <<  getXPos() << endl;
+  cout <<"YPos is: " <<  getYPos() << endl;
+  cout <<"XMom is: " <<  getXMom() << endl;
+  cout <<"YMom is: " <<  getYMom() << endl;
+  cout <<"Energy is: " << getEnergy() << endl;
+  cout <<"LifeTime is: " << T.getLifeTime() << endl;
+  cout <<"Spacelocks: "<< T.getNSLocks() << endl;
 }
