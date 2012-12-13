@@ -145,18 +145,43 @@ void Toriverse::Interaction(Harvester& Harvey){
   else if ((64 < int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) &&
 	    int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) < 91))
     {
+      
       int lTmp = int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) - 65;
-      if (tmpVecPosX == getWHolePos(lTmp,0,0) &&
-	  tmpVecPosY == getWHolePos(lTmp,0,1)){
-	Harvey.setXPos(getWHolePos(lTmp,1,0));
-	Harvey.setYPos(getWHolePos(lTmp,1,1));
+      if (MLockStore.empty()){
+	vector<int> tmpVecML;
+	tmpVecML.push_back(tmpVecPosX);
+	tmpVecML.push_back(tmpVecPosY);
+	MLockStore.push_back(tmpVecML);
+	lastMLock = lTmp;
       }
-      else if (tmpVecPosX == getWHolePos(lTmp,1,0) &&
-	       tmpVecPosY == getWHolePos(lTmp,1,1)){
-	Harvey.setXPos(getWHolePos(lTmp,0,0));
-	Harvey.setYPos(getWHolePos(lTmp,0,1));    
-      } 
+      else if (!MLockStore.empty() && lastMLock == lTmp){
+	vector<int> tmpVecML;
+	tmpVecML.push_back(tmpVecPosX);
+	tmpVecML.push_back(tmpVecPosY);
+	MLockStore.push_back(tmpVecML);
+	setObject(".",MLockStore[0][0],MLockStore[0][1]);
+	setObject(".",MLockStore[1][0],MLockStore[1][1]);
+	while(!MLockStore.empty()){
+	  MLockStore.pop_back();
+	}
+      }
+      else if (!MLockStore.empty() && lastMLock != lTmp){
+	while(!MLockStore.empty()){
+	  MLockStore.pop_back();
+	}
+	vector<int> tmpVecML;
+	tmpVecML.push_back(tmpVecPosX);
+	tmpVecML.push_back(tmpVecPosY);
+	MLockStore.push_back(tmpVecML);
+	lastMLock = lTmp;
+      }
     }
   
   timeStep();
 }
+		     
+
+
+
+
+
