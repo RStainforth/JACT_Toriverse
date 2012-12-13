@@ -37,6 +37,9 @@ public:
   string getFate() {return HFate;}
   bool getStatus() {return HStatus;}
 
+  void positionInMap(Toriverse& T);
+  void getCharacterH(Toriverse& T);
+
   // Command function
 
   int modH(int x, int m){
