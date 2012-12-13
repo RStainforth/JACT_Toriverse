@@ -140,7 +140,7 @@ void Toriverse::Interaction(Harvester& Harvey){
     }
 
   else if ((64 < int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) &&
-	    int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) < 91))
+	    int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) < 92))
     {
       
       int lTmp = int((getObject(tmpVecPosX,tmpVecPosY)).at(0)) - 65;
@@ -150,10 +150,14 @@ void Toriverse::Interaction(Harvester& Harvey){
 	tmpVecML.push_back(tmpVecPosY);
 	MLockStore.push_back(tmpVecML);
 	lastMLock = lTmp;
+	cout << "MLock FILLED WITH LETTER: " << getObject(tmpVecPosX,tmpVecPosY) << endl;
       }
       else if (!MLockStore.empty() && lastMLock == lTmp){
-	if (MLockStore[0][0] != tmpVecPosX &&
-	    MLockStore[0][1] != tmpVecPosY){
+	if (((MLockStore[0][0] != tmpVecPosX) ||
+	    (MLockStore[0][1] != tmpVecPosY)) &&
+	    ((MLockStore[0][1] != tmpVecPosX) ||
+	     (MLockStore[0][0] != tmpVecPosY))){
+	  cout << "FOUND MATCHING LETTER: " << getObject(tmpVecPosX,tmpVecPosY) << endl;
 	  vector<int> tmpVecML;
 	  tmpVecML.push_back(tmpVecPosX);
 	  tmpVecML.push_back(tmpVecPosY);
@@ -168,6 +172,8 @@ void Toriverse::Interaction(Harvester& Harvey){
 	  }
 	}
       }
+
+      
       else if (!MLockStore.empty() && lastMLock != lTmp){
 	while(!MLockStore.empty()){
 	  MLockStore.pop_back();
@@ -177,6 +183,7 @@ void Toriverse::Interaction(Harvester& Harvey){
 	tmpVecML.push_back(tmpVecPosY);
 	MLockStore.push_back(tmpVecML);
 	lastMLock = lTmp;
+	cout << "MLOCK WAS OCCUPIED, EMPTIED AND NOW FILLED WITH LETTER: " << getObject(tmpVecPosX,tmpVecPosY) << endl;
       }
     }
   
