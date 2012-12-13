@@ -158,6 +158,8 @@ void Toriverse::Interaction(Harvester& Harvey){
 	MLockStore.push_back(tmpVecML);
 	setObject(".",MLockStore[0][0],MLockStore[0][1]);
 	setObject(".",MLockStore[1][0],MLockStore[1][1]);
+	nSLocks--;
+    	cout << "MSLock Removed!" << endl;
 	while(!MLockStore.empty()){
 	  MLockStore.pop_back();
 	}
