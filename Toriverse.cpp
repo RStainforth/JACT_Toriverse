@@ -187,11 +187,20 @@ void Toriverse::Interaction(Harvester& Harvey){
       }
     }
   
-  timeStep();
+  //timeStep();
 }
 		     
 
-
-
+void Toriverse::printMap(){
+  cout << "Current Map:" <<endl;
+ 
+  for (int i = getYDim()-1; i >= 0; i--){
+    for (int j = 0; j < getXDim(); j++){
+      cout << getObject(j,i);
+    }
+    cout << endl;
+  }
+  cout << endl;
+}
 
 
