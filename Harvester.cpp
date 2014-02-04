@@ -138,6 +138,12 @@ void Harvester::HarvesterCMD(Toriverse& T, char cmd){
 	  yPos = modH(yPos + yMom, T.getYDim());
 	}
       }
+      if(Energy < 0){
+	setStatus(0);
+	setScore(0);
+	setFate("Harvester destroyed because of Energy < 0");
+      }
+      
     }
       
     else if (cmd == 'e') {
